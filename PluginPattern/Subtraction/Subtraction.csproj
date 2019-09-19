@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Calculator\Calculator.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="set pluginDir=$(SolutionDir)Calculator\$(OutDir)Plugins&#xD;&#xA;IF not exist &quot;%25pluginDir%25&quot; (mkdir &quot;%25pluginDir%25&quot;)&#xD;&#xA;xcopy /y /d  &quot;$(TargetDir)$(ProjectName).*&quot; &quot;%25pluginDir%25&quot;" />
+  </Target>
+
+</Project>
